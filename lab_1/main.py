@@ -6,7 +6,7 @@ for letter in key:
 	letter_rus = letter_rus.replace(letter, '')
 letter_rus = list(letter_rus)
 combined_list = key + letter_rus
-table_rus = [
+table_rus1 = [
     [None, None, None, None, None, None, None, None],
     [None, None, None, None, None, None, None, None],
     [None, None, None, None, None, None, None, None],
@@ -15,7 +15,7 @@ table_rus = [
 row = 0
 col = 0
 for letter in combined_list:
-	table_rus[row][col] = letter
+	table_rus1[row][col] = letter
 	col +=1
 	if col ==8:
 		col = 0
