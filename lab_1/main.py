@@ -1,1 +1,1 @@
-print(ww)
+print("ww")
