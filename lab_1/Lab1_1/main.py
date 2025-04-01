@@ -1,4 +1,4 @@
-import constants
+from isb.lab_1.Lab1_1 import constants
 import re
 
 
