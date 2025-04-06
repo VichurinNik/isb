@@ -23,16 +23,20 @@ def text_editing(text: str):
 	:param text: исходный текст
 	:return: преобразованный текст
 	"""
-	new_text = text.upper().strip().replace('Ё', 'E')
+	new_text = text.upper().strip().replace('Ё', 'Е')
 	new_text = ''.join(filter(str.isalnum, new_text))
-	pattern = r"(.)\1"
-	new_text = re.sub(pattern, r"\1Х\1", new_text)
-	new_text = list(new_text)
-	text_long = len(new_text)
+	result = []
+	i = 0
+	while i < len(new_text):
+		result.append(new_text[i])
+		if i + 1 < len(new_text) and new_text[i] == new_text[i + 1]:
+			result.append('Х')
+		i += 1
+	text_long = len(result)
 	if text_long % 2 != 0:
-		new_text.append("Х")
-	print(new_text)
-	return new_text
+		result.append("Х")
+	print(result)
+	return result
 
 
 def matrix_editing(key: list):
