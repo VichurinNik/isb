@@ -23,6 +23,7 @@ def calculate_char_percentages(text):
 
 def main():
 	text = read_file(constants.PATH_TO_ENCRYPTED_TEXT)
+	result_char = {}
 	print(calculate_char_percentages(text))
 	text = text.replace(" ", 'р')
 	text = text.replace("Д", 'а')
@@ -56,8 +57,6 @@ def main():
 	text = text.replace("9", 'ц')
 	text = text.replace("?", ' ')
 	text = text.replace("Ф", 'э')
-	print(text)
-
 
 
 if __name__ == '__main__':
