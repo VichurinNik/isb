@@ -35,7 +35,6 @@ def text_editing(text: str):
 	text_long = len(result)
 	if text_long % 2 != 0:
 		result.append("Х")
-	print(result)
 	return result
 
 
