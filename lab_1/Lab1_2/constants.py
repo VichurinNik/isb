@@ -13,16 +13,4 @@ PATH_TO_ENCRYPTED_TEXT = "encrypted_text.txt"
 
 PATH_TO_WRITE_DECRYPTED_TEXT_FILE = "decrypted_text.txt"
 
-PATH_TO_WRITE_KEY = "decrypt_key.txt"
-
-KEY_DECRYPT = {
-    ' ': 'р' , 'К': "е", 'Ь': 'о', 't': 'и', 'Ы': 'н',
-    'r': 'в', 'Д': 'а', '>': 'с', 'О': 'т', '<': 'м',
-
-    '2': " ", 'Б': 'д', 'Й': 'к', '1': 'я', 'Я': 'п',
-    'Ч': 'л', 'М': 'з', '0': 'у', 'a': 'ч', 'Х': 'ю',
-
-    'А': 'г', 'Л': 'ж', 'Е': 'б', 'c': 'щ', '8': 'ы',
-    '3': 'х', ',': 'ь', 'b': 'ш', '.': 'ф', '9': 'ц',
-    '?': '', 'Ф': 'э'
-}
+PATH_TO_WRITE_KEY = "decrypt_key.json"

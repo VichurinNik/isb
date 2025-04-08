@@ -1,4 +1,30 @@
 import constants
+import json
+
+
+def read_json(filename: str) -> dict:
+    """
+    Загружает из JSON-файла.
+    """
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Ошибка при загрузке {filename}: {e}")
+        return {}
+
+
+def write_json(file_path: str, data: dict | list) -> None:
+    """
+    Записывает данные в JSON-файл по указанному пути.
+    :param file_path: Путь к файлу.
+    :param data: Данные для записи (словарь или список).
+    """
+    try:
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
+    except (OSError, TypeError) as e:
+        print(f"Ошибка при записи в файл: {e}")
 
 
 def read_file(file: str) -> str:
@@ -58,8 +84,9 @@ def main() -> None:
     Читает зашифрованный текст из файла, применяет ключ дешифрации и записывает результат в другой файл.
     """
     try:
+        key = read_json(constants.PATH_TO_WRITE_KEY)
         text = read_file(constants.PATH_TO_ENCRYPTED_TEXT)
-        new_text = substitution_key(constants.KEY_DECRYPT, text)
+        new_text = substitution_key(key, text)
         write_to_file(constants.PATH_TO_WRITE_DECRYPTED_TEXT_FILE, new_text)
     except Exception as e:
         print(f"Произошла ошибка: {e}")
