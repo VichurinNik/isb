@@ -1,0 +1,8 @@
+Frequency bitwise test:
+cpp: 0.7236736098317631
+java: 0.4795001221869535
+
+A test for identical consecutive bits:
+cpp: 0.6032105431220571
+java: 0.9646114798766142
+
