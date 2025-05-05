@@ -1,4 +1,6 @@
 import math
+from msilib import sequence
+
 from scipy.special import gammaincc
 
 
@@ -14,14 +16,19 @@ def frequency_test(bits):
 	Возвращает:
 	float: p-значение теста.
 	"""
+
 	sum_bit = 0
 	for bit in bits:
 		if bit == "0":
 			sum_bit += -1
 		else:
 			sum_bit += 1
-	normal_sum = sum_bit / math.sqrt(len(bits))
-	p_value = math.erfc(normal_sum / math.sqrt(2))
+
+	# Вычисляем абсолютное значение нормализованной суммы
+	abs_normal_sum = abs(sum_bit) / math.sqrt(len(bits))
+
+	# Вычисляем p-value с использованием дополнительной функции ошибок
+	p_value = math.erfc(abs_normal_sum / math.sqrt(2))
 	return p_value
 
 
