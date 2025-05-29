@@ -3,19 +3,21 @@ import argparse
 from play import *
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-gen", "--generation", help="Запускает режим генерации ключей")
-    group.add_argument("-enc", "--encryption", help="Запускает режим шифрования")
-    group.add_argument("-dec", "--decryption", help="Запускает режим дешифрования")
+    # parser = argparse.ArgumentParser()
+    # group = parser.add_mutually_exclusive_group(required=True)
+    # group.add_argument("-gen", "--generation", help="Запускает режим генерации ключей")
+    # group.add_argument("-enc", "--encryption", help="Запускает режим шифрования")
+    # group.add_argument("-dec", "--decryption", help="Запускает режим дешифрования")
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
+    Performance.generate_keys()
+    Performance.encrypt_text()
+    Performance.decrypt_text()
+    # if args.generation is not None:
+    #     Performance.generate_keys()
 
-    if args.generation is not None:
-        Performance.generate_keys()
+    # elif args.encryption is not None:
+    #     Performance.encrypt_text()
 
-    elif args.encryption is not None:
-        Performance.encrypt_text()
-
-    else:
-        Performance.decrypt_text()
+    # else:
+    #     Performance.decrypt_text()

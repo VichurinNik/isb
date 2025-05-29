@@ -9,7 +9,7 @@ class FileWorker:
 	"""
 
 	@staticmethod
-	def read_file(file_path: str) -> bytes:
+	def read_file(file_path: str):
 		"""
 		Чтение содержимого файла в бинарном режиме.
 
