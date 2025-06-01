@@ -1,15 +1,22 @@
 import hashlib
-import os
 import json
+import os
+import time
 import multiprocessing
-from typing import Optional, List
+from typing import Optional, List, Tuple
 from multiprocessing import Event, Queue, Value, Lock
 from const import *
 
 
 class CardSearcher:
+	"""Класс для поиска номера кредитной карты по его BLAKE2s хешу.
+
+	Используется многопроцессорная обработка для ускорения поиска.
+	"""
+
 	def __init__(self):
-		"""
+		"""Инициализирует CardSearcher с примитивами синхронизации.
+
 		Создает:
 			- found_event: Event для остановки процессов при нахождении результата
 			- result_queue: Queue для передачи найденного номера карты
@@ -23,6 +30,7 @@ class CardSearcher:
 
 	def get_cpu_count(self) -> int:
 		"""Возвращает количество доступных CPU ядер.
+
 		Returns:
 			int: Количество CPU ядер (минимум 1)
 		"""
@@ -42,15 +50,19 @@ class CardSearcher:
 		"""
 		return [f"{bin_code}{i:06}{LAST_4_DIGITS}" for i in range(1000000)]
 
-	def search_card_number(self) -> Optional[str]:
+	def search_card_number(self, num_processes=None) -> Tuple[Optional[str], float]:
 		"""Основной метод поиска номера карты.
 
 		Запускает многопроцессорный поиск по всем BIN-кодам.
 
+		Args:
+			num_processes: Число процессов (по умолчанию равняется числу доступных ядер)
+
 		Returns:
-			Optional[str]: Найденный номер карты или None если не найден
+			Tuple[Optional[str], float]: Найденный номер карты и время выполнения
 		"""
-		cpu_count = self.get_cpu_count()
+		cpu_count = num_processes or self.get_cpu_count()
+		start_time = time.time()
 
 		with multiprocessing.Pool(
 				cpu_count,
@@ -70,7 +82,10 @@ class CardSearcher:
 					if self.found_event.is_set():
 						break
 
-		return self.result_queue.get() if not self.result_queue.empty() else None
+		end_time = time.time()
+		elapsed_time = end_time - start_time
+		result = self.result_queue.get() if not self.result_queue.empty() else None
+		return result, elapsed_time
 
 	@staticmethod
 	def init_worker(found_event, result_queue, processed_count, lock):
